@@ -7,7 +7,13 @@ require("dotenv").config();
 
 
 userRouter.get("/", async (req, res) => {
-  
+    try {
+        const users = await UserModal.find();
+        res.send(users)
+    } catch (err) {
+        res.send({ "msg": "Please Login", "error": err.message })
+    }
+
   res.send("All Users");
 });
 
